@@ -1,0 +1,391 @@
+openapi: 3.0.0
+info:
+  title: Essote Palaute REST API
+  description: REST API for Essote Palaute
+  version: "1.0"
+paths:
+  "/v1/reviews":
+    get:
+      operationId: listReviews
+      summary: Lists reviews
+      parameters:
+        - name: productId
+          in: query
+          description: product id
+          required: false
+          schema:
+            type: integer
+            format: int64
+        - name: minRating
+          in: query
+          description: min rating
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: maxRating
+          in: query
+          description: max rating
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: minReviewLength
+          in: query
+          description: displays only reviews containing at least given amount of characters
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: firstResult
+          in: query
+          description: First result
+          required: false
+          schema:
+            type: integer
+            format: int64
+        - name: maxResults
+          in: query
+          description: Max results
+          required: false
+          schema:
+            type: integer
+            format: int64
+        - name: sort
+          in: query
+          description: Sort
+          required: false
+          schema:
+            $ref: '#/components/schemas/ReviewListSort'
+      description: |
+        Lists reviews
+      tags:
+        - Reviews
+      responses:
+        "200":
+          description: Returns a list of reviews
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Review"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/BadRequest"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Forbidden"
+        "500":
+          description: Internal server error
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+  "/v1/reviews/{reviewId}":
+    get:
+      operationId: findReview
+      summary: Finds review
+      description: |
+        Finds single review
+      parameters:
+        - name: reviewId
+          in: path
+          description: review id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      tags:
+        - Reviews
+      responses:
+        "200":
+          description: Returns a single review
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Review"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/BadRequest"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Forbidden"
+        "500":
+          description: Internal server error
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+  "/v1/surveys":
+    get:
+      operationId: listSurveys
+      summary: Lists surveys
+      description: |
+        Lists surveys
+      tags:
+        - Surveys
+      responses:
+        "200":
+          description: Returns a list of surveys
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Survey"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/BadRequest"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Forbidden"
+        "500":
+          description: Internal server error
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+  "/v1/surveys/{surveyName}":
+    get:
+      operationId: findSurvey
+      summary: Finds survey
+      description: |
+        Finds single survey
+      parameters:
+        - name: surveyName
+          in: path
+          description: survey name
+          required: true
+          schema:
+            type: string 
+      tags:
+        - Surveys
+      responses:
+        "200":
+          description: Returns a single survey
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Survey"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/BadRequest"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Forbidden"
+        "500":
+          description: Internal server error
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+  "/v1/surveys/{surveyName}/questions":
+    get:
+      operationId: listSurveyQuestions
+      summary: lists questions of survey
+      description: |
+        Lists questions of sigle survey
+      parameters:
+        - name: surveyName
+          in: path
+          description: survey name
+          required: true
+          schema:
+            type: string 
+      tags:
+        - Surveys
+      responses:
+        "200":
+          description: Returns a single survey
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SurveyQuestion"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/BadRequest"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Forbidden"
+        "500":
+          description: Internal server error
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+  "/v1/surveys/{surveyName}/questions/{questionNumber}/summary":
+    get:
+      operationId: findSurveyQuestionSummary
+      summary: Finds survey question summary
+      description: |
+        Finds single survey question summary
+      parameters:
+        - name: surveyName
+          in: path
+          description: survey name
+          required: true
+          schema:
+            type: string
+        - name: questionNumber
+          in: path
+          description: Question number
+          required: true
+          schema:
+            type: integer
+            format: int64
+      tags:
+        - Surveys
+      responses:
+        "200":
+          description: Returns a single survey
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/SurveyQuestionSummary"
+        "400":
+          description: Invalid request was sent to the server
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/BadRequest"
+        "403":
+          description: Attempted to make a call with unauthorized client
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Forbidden"
+        "500":
+          description: Internal server error
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+components:
+  schemas:
+    Review:
+      properties:
+        id:
+          type: integer
+          format: int64
+        productId:
+          type: integer
+          format: int64
+        rating:
+          type: integer
+          format: int32
+        created:
+          type: string
+          format: date-time
+          description: Create time.
+        modified:
+          type: string
+          format: date-time
+          description: Create time.
+        review:
+          type: string
+        location:
+          type: string
+    SurveyQuestion:
+      properties:
+        number:
+          type: integer
+          format: int64
+        question:
+          type: string
+    Survey:
+      properties:
+        name:
+          type: string
+        questions:
+          type: array
+          items:
+            $ref: "#/components/schemas/SurveyQuestion"
+    SurveyQuestionSummary:
+      properties:
+        positive:
+          type: integer
+          format: int64
+        negative:
+          type: integer
+          format: int64
+        total:
+          type: integer
+          format: int64
+    ReviewListSort:
+      type: string
+      enum:
+        - CREATED_DESC
+        - CREATED_ASC
+    InternalServerError:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+    Forbidden:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+    BadRequest:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+    NotImplemented:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+    NotFound:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
