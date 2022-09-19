@@ -90,7 +90,7 @@ paths:
             application/json;charset=utf-8:
               schema:
                 $ref: "#/components/schemas/Error"
-  "/v1/reviews/{reviewId}":
+  /v1/reviews/{reviewId}:
     get:
       operationId: findReview
       summary: Finds review
@@ -119,7 +119,7 @@ paths:
             application/json;charset=utf-8:
               schema:
                 $ref: "#/components/schemas/Error"
-  "/v1/surveys":
+  /v1/surveys:
     get:
       operationId: listSurveys
       summary: Lists surveys
@@ -142,7 +142,7 @@ paths:
             application/json;charset=utf-8:
               schema:
                 $ref: "#/components/schemas/Error"
-  "/v1/surveys/{surveyName}":
+  /v1/surveys/{surveyName}:
     get:
       operationId: findSurvey
       summary: Finds survey
@@ -170,7 +170,7 @@ paths:
             application/json;charset=utf-8:
               schema:
                 $ref: "#/components/schemas/Error"
-  "/v1/surveys/{surveyName}/questions":
+  /v1/surveys/{surveyName}/questions:
     get:
       operationId: listSurveyQuestions
       summary: lists questions of survey
@@ -200,7 +200,7 @@ paths:
             application/json;charset=utf-8:
               schema:
                 $ref: "#/components/schemas/Error"
-  "/v1/surveys/{surveyName}/questions/{questionNumber}/summary":
+  /v1/surveys/{surveyName}/questions/{questionNumber}/summary:
     get:
       operationId: findSurveyQuestionSummary
       summary: Finds survey question summary
