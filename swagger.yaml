@@ -18,6 +18,55 @@ paths:
             text/plain:
               schema:
                 type: string
+  /v1/reviewProducts:
+    get:
+      operationId: listReviewProducts
+      summary: Lists reviewProducts
+      tags:
+        - ReviewProducts
+      responses:
+        "200":
+          description: Returns a list of reviewProducts
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ReviewProduct"
+        "default":
+          description: Invalid request was sent to the server
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /reviewProducts/{reviewProductId}:
+    get:
+      operationId: findReviewProduct
+      summary: Finds reviewProduct
+      description: Finds single reviewProduct
+      parameters:
+        - name: reviewProductId
+          in: path
+          description: reviewProduct id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      tags:
+        - ReviewProducts
+      responses:
+        "200":
+          description: Returns a single reviewProduct
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/ReviewProduct"
+        "default":
+          description: Invalid request was sent to the server
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Error"
   /v1/reviews:
     get:
       operationId: listReviews
@@ -291,6 +340,17 @@ components:
       enum:
         - CREATED_DESC
         - CREATED_ASC
+    ReviewProduct:
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        displayName:
+          type: string
+        link:
+          type: string
     Error:
       type: object
       properties:
