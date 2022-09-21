@@ -51,7 +51,7 @@ paths:
           required: true
           schema:
             type: integer
-            format: int64
+            format: int32
       tags:
         - ReviewProducts
       responses:
@@ -78,7 +78,7 @@ paths:
           required: false
           schema:
             type: integer
-            format: int64
+            format: int32
         - name: minRating
           in: query
           description: min rating
@@ -106,14 +106,14 @@ paths:
           required: false
           schema:
             type: integer
-            format: int64
+            format: int32
         - name: maxResults
           in: query
           description: Max results
           required: false
           schema:
             type: integer
-            format: int64
+            format: int32
         - name: sort
           in: query
           description: Sort
@@ -152,7 +152,7 @@ paths:
           required: true
           schema:
             type: integer
-            format: int64
+            format: int32
       tags:
         - Reviews
       responses:
@@ -268,7 +268,7 @@ paths:
           required: true
           schema:
             type: integer
-            format: int64
+            format: int32
       tags:
         - Surveys
       responses:
@@ -290,10 +290,10 @@ components:
       properties:
         id:
           type: integer
-          format: int64
+          format: int32
         productId:
           type: integer
-          format: int64
+          format: int32
         rating:
           type: integer
           format: int32
@@ -313,7 +313,7 @@ components:
       properties:
         number:
           type: integer
-          format: int64
+          format: int32
         question:
           type: string
     Survey:
@@ -328,13 +328,13 @@ components:
       properties:
         positive:
           type: integer
-          format: int64
+          format: int32
         negative:
           type: integer
-          format: int64
+          format: int32
         total:
           type: integer
-          format: int64
+          format: int32
     ReviewListSort:
       type: string
       enum:
@@ -344,7 +344,7 @@ components:
       properties:
         id:
           type: integer
-          format: int64
+          format: int32
         name:
           type: string
         displayName:
