@@ -39,7 +39,7 @@ paths:
             application/json;charset=utf-8:
               schema:
                 $ref: "#/components/schemas/Error"
-  /reviewProducts/{reviewProductId}:
+  /v1/reviewProducts/{reviewProductId}:
     get:
       operationId: findReviewProduct
       summary: Finds reviewProduct
