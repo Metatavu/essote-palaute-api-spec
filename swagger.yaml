@@ -139,35 +139,6 @@ paths:
             application/json;charset=utf-8:
               schema:
                 $ref: "#/components/schemas/Error"
-  /v1/reviews/{reviewId}:
-    get:
-      operationId: findReview
-      summary: Finds review
-      description: |
-        Finds single review
-      parameters:
-        - name: reviewId
-          in: path
-          description: review id
-          required: true
-          schema:
-            type: integer
-            format: int32
-      tags:
-        - Reviews
-      responses:
-        "200":
-          description: Returns a single review
-          content:
-            application/json;charset=utf-8:
-              schema:
-                $ref: "#/components/schemas/Review"
-        "default":
-          description: Invalid request was sent to the server
-          content:
-            application/json;charset=utf-8:
-              schema:
-                $ref: "#/components/schemas/Error"
   /v1/surveys:
     get:
       operationId: listSurveys
